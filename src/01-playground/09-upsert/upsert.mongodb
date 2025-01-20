@@ -1,0 +1,19 @@
+use("platzi_store")
+
+//upsert logra indicar que debe inserta o actualizar
+// basado en el query
+// upsert solo funciona con el metodo updateOne
+db.iot.updateOne({
+    //query
+    sensor:"A001",
+    date: "2022-01-04"
+    },
+    //operacion
+    {
+        $push: {
+            readings:7799
+        }
+    },{
+        upsert: true
+    }
+)

@@ -1,0 +1,27 @@
+use("platzi_store")
+
+
+//$pull exclusivo de arrays, 
+// remueve un elemento de un array basado en el match del query
+//eliminar el elemento book de los registros que lo tengan
+db.inventory.updateMany(
+    {}, //si esta vacio trae todos los documentos
+    {
+        $pull: {
+            tags: "book"
+        }
+    }
+)
+
+//remover mas de un elemento del array
+//eliminar los elementos appliance y school de los registros que lo tengan
+db.inventory.updateMany(
+    {}, //si esta vacio trae todos los documentos
+    {
+        $pull: {
+            tags: {
+                $in: ["appliance","school"]  // in: Hace match con algunos de los valores especificados en un arreglo.
+            }
+        }
+    }
+)

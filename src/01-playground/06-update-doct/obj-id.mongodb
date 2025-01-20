@@ -1,0 +1,15 @@
+use("platzi_store")
+
+// $inc: con base al precio original se incrementa el valor.
+// al Actualizar por el id de mongo se debe usar la funcion ObjectID
+db.products.updateOne(
+    //query
+    {_id:ObjectId("678c08b93607c0219f6cb825")},
+    // change => operator
+    {
+        $inc: {
+            price:  200,
+        }
+    }
+
+)

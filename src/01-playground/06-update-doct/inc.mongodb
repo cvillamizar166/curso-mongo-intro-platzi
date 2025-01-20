@@ -1,0 +1,14 @@
+use("platzi_store")
+
+// $inc: con base al precio original se incrementa el valor
+db.products.updateOne(
+    //query
+    {_id:2},
+    // change => operator
+    {
+        $inc: {
+            price:  200,
+        }
+    }
+
+)
