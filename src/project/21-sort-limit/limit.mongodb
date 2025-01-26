@@ -1,0 +1,14 @@
+use("sample_training")
+
+//sort
+// 1 = orderna de 0 -10  A -Z
+// -1 de forma descendente 10-0 Z-A
+db.zips.find({
+    pop:{
+        $gte: 100
+    }
+}).sort({pop:-1})
+.limit(2)
+
+// .limit() => Limita la cantidad de doc que queremos traer, ej: .limit(3) trae 3 docs.
+

@@ -1,0 +1,8 @@
+use("platzi_store")
+
+// skip() => indica desde que posición nos traera los doc, ej: en una lista del 1 al 10; .skip(3) nos da los doc desde el 4 hasta el 10.
+
+db.categories
+    .find()
+    .skip(9)
+    .limit(3)
