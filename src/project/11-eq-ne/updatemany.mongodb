@@ -1,0 +1,17 @@
+use("platzi_store")
+
+// todos los prodcutos que no tenga qty = 20 aunmente su qty en 10
+db.inventory.updateMany(
+    //query - operators
+    {
+        qty: {
+            $ne: 20
+        }
+    },
+    // update - operators
+    {
+        $inc: {
+            qty: 10
+        }
+    }
+)

@@ -1,0 +1,22 @@
+use("sample_training")
+
+
+/*
+Viajes en bicicleta que iniciaron en x punto y finalizaron
+en el mismo punto.
+
+Ademas se puede agregar el operador and pero tener en cuenta la forma como debe escribirse en expr
+*/
+db.trips.find(
+    {
+        $expr: {
+            $and: [
+                { $eq: ["$start station id", "$end station id"] },
+                {$gte: ["$tripduration",1200]},
+                {$lte: ["$tripduration",1300]}
+                // { tripduration: { $gte: 1200 } } esto generaria un error pues al usar expr la nomenclatura debe ser acorde
+            ]
+
+        }
+    }
+)

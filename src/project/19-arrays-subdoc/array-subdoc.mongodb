@@ -1,0 +1,32 @@
+use("sample_training")
+
+db.trips.find({
+    "start station location.type":"Point"
+})
+
+// podemos indicar la posicion del array a consultar
+db.companies.find(
+    {
+        "relationships.0.person.first_name": "Mark"
+    },
+    {
+        name:1,
+        relationships:1
+    }
+).count() //108
+
+//buscar a todos los mark
+
+db.companies.find(
+    {
+        relationships:{
+            $elemMatch:{
+                "person.first_name": "Mark"
+            }
+        }
+    },
+    {
+        name:1,
+        relationships:1
+    }
+).count() //523

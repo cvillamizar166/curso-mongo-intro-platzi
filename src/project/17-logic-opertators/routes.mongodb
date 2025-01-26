@@ -1,0 +1,37 @@
+use("sample_training")
+
+db.routes.find({
+    airplane: "E70"
+})
+
+
+db.routes.find({
+    $or: [
+        { src_airport: "BOG" },
+        { dst_airport: "BOG" }
+    ]
+}).count()
+
+// vuelos del avion E70 con destiono o salida BOG
+db.routes.find({
+    airplane: "E70",
+    $or: [
+        { src_airport: "BOG" },
+        { dst_airport: "BOG" }
+    ]
+})
+
+
+// explicita
+
+db.routes.find({
+    $and: [
+        { airplane: "E70" }, //primera condicion
+        {
+            $or: [        // segunda condicion
+                { src_airport: "BOG" }, //primera condicion del or
+                { dst_airport: "BOG" }
+            ]
+        }
+    ]
+}).count() //14

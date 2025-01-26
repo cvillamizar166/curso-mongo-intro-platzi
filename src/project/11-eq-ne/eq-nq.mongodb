@@ -1,0 +1,28 @@
+use("platzi_store")
+
+//Using $eq igual
+
+//Este operador ya viene implicito
+
+db.inventory.find({qty: 20})
+
+//Explicitamente
+
+db.inventory.find({
+    $eq:{
+        qty:20
+    }
+})
+
+
+//busqueda por un subdocumento
+db.inventory.find({"item.name": "ab"})
+
+
+// Using  $ne no igual
+
+db.inventory.find({ 
+    qty:{
+        $ne:20
+    }
+})

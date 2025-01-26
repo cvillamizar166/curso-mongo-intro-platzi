@@ -1,0 +1,48 @@
+use("platzi_store")
+
+//db.inventory.find({"item.description":"First line\nSecond line"})
+
+// buscar la palabra line, la expresion inicia con / /
+
+db.inventory.find({"item.description":{
+    $regex: /line/
+}})
+
+
+//  i => nos devuelve los doc que tengan la palabra line, ignorando minus-mayus.
+db.inventory.find({"item.description":{
+    $regex: /LINE/i
+}})
+
+
+// buscar los textos que terminen en la palabra line
+// /$/ => nos devuelve los doc que terminen con la palabra line.
+
+db.inventory.find(
+    {
+        "item.description":{
+            $regex: /line$/i
+        }
+    }
+)
+
+// Buscar los documentos que inicien con la palabra Single
+// /^/ => nos devuelve los doc que empiecen con la palabra Single
+
+db.inventory.find(
+    {
+        "item.description":{
+            $regex: /^single/i
+        }
+    }
+)
+
+// Buscar los documentos que empiecen con S teniendo en cuenta salto de linea
+// /^S/m => nos devuelve los doc que empiecen por S, ignorando los saltos de linea. Ej: ( Single line Second line )
+db.inventory.find(
+    {
+        "item.description":{
+            $regex: /^s/im
+        }
+    }
+)

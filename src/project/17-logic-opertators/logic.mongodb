@@ -1,0 +1,64 @@
+use("sample_training")
+
+
+// and de forma implicita
+db.inspections.find({
+    sector: "Tax Preparers - 891",
+    result: "Unable to Locate"
+}).count() //6
+
+
+//and explicita
+// $and [{}, {}, {}]
+db.inspections.find({
+    $and: [
+        { sector: "Tax Preparers - 891"},
+        { result: "Unable to Locate"}
+    ]
+}).count() //6
+
+
+// or
+// $or [{}, {}, {}]
+// es necesariamenten de forma explicita
+
+db.inspections.find({
+    $or: [
+        { sector: "Tax Preparers - 891"},
+        { result: "Unable to Locate"}
+    ]
+}).count() //892
+
+
+// nor
+// $nor => los que no cumplan con ninguna condición.
+
+db.inspections.find({
+    $nor: [
+        { sector: "Tax Preparers - 891"},
+        { result: "Unable to Locate"}
+    ]
+})
+
+
+db.inspections.find({
+    $nor: [
+        { result: "No Violation Issued"},
+        { result: "Unable to Locate"}
+    ]
+ } ,
+ //projection
+ {
+     result:1,
+     _id:0
+ }
+)
+
+// not 
+// no recibe un array, se aplica directamente al atributo
+// excluye un elemento en especifico
+db.inspections.find({
+    result: {
+        $not: { $regex: /Unable to Locate/}
+    }
+})

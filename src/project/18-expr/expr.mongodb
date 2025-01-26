@@ -1,0 +1,20 @@
+use("platzi_store")
+
+// primera forma
+db.monthlyBudget.find({
+    spent: {
+        $gte:100
+    }
+})
+
+// expresive operator
+
+// nos sirve para comparar valores con un mismo atributo del documento
+//  Retorna donde el spent es mayor o igual al budget
+db.monthlyBudget.find(
+    {
+        $expr: {
+            $gte: ["$spent", "$budget"]
+        }
+    }
+)

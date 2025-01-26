@@ -1,0 +1,41 @@
+use("sample_training")
+
+// actualizar aquellos registros donde el viaje sea de un suscriptor
+// la duracion este entre 300 y 500 minutos y colocarles el campo beneficio = false
+//2144 actualizo
+
+db.trips.updateMany(
+    //query
+    {
+        usertype: "Subscriber", 
+        tripduration: {
+            $gte: 300, $lte:500
+        }  
+    },
+    //update
+    {
+        $set:{
+            voucher: false  
+        }
+    })
+
+
+
+// actualizar aquellos registros donde el viaje no sea de un suscriptor
+// la duracion este entre 300 y 500 minutos y colocarles el campo beneficio = activo
+db.trips.updateMany(
+    {
+        usertype:{
+            $ne: "Subscriber"
+        },
+        tripduration:{
+            $gte: 300, $lte:500
+        }
+    },
+    //update
+    {
+        $set: {
+            voucher: true
+        }
+    }
+)

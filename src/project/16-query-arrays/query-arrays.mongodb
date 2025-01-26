@@ -1,0 +1,46 @@
+use("platzi_store")
+
+// $in nos sirve para objetos y arrays es como un OR
+// selecciona los documentos que tengan 20 o 25
+db.inventory.find({ qty: { $in: [20,25]} })
+
+db.inventory.find({ tags: { $in: ["book","electronics"]} })
+
+
+// $nin  
+// selecciona documentos que no tenga algun valor especificado
+db.inventory.find({ qty: { $nin: [20,25]} })
+db.inventory.find({ tags: { $nin: ["book","electronics"]} })
+
+
+//solo para arrays
+db.inventory.find({ tags: "book"})
+//retorna el documento que cumpla con la busqueda en el array en la misma posicion
+db.inventory.find({ tags: ["school","book"]})
+
+
+//solo para arrays
+// arrays $all
+
+// Selecciona los documentos que tengan dichos elementos en el array
+// sin importar su orden
+db.inventory.find({ tags: { $all: ["book","school"]}})
+
+
+// $size
+// Selecciona un documento donde su array solo contenga 2 elementos
+db.inventory.find({ tags: { $size: 2 }})
+
+
+// $elemMatch
+// nos sirve para consultar un array que en su interior tenga un objeto
+db.survey.find({ results: { $elemMatch: {product: "xyz" }}})
+
+db.survey.find( {results: {
+    $elemMatch: {
+        product:  "xyz",
+        score: {
+            $gte: 7
+        }
+    }
+}} )
